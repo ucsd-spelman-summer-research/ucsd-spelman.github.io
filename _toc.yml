@@ -6,8 +6,8 @@ root: index
 parts:
   - caption: Contents
     chapters:
-      - file: program/expectations
-      - file: program/faculty
       - file: program/requirements
+      - file: program/faculty
+      - file: program/expectations
       - file: program/principles
 
