@@ -31,24 +31,29 @@ April-May (Psych): Begin mentorship. A minimum of 3 zoom meetings will be used t
 
 #### Week 1
 (STARS): Orientation; Team Building; Program Introductions; Ethics in Science and Research; GRE Prep 
+
 (Psych): 2h “Entering Research” workshop led by CIMER trained facilitator (Dr. Gremel and graduate student).
 Welcome Beach Barbeque with all participating students and associated lab members.
  
 #### Week 2 
 (STARS): GRE Prep; NSF Graduate Research Fellowship Program
+
 (Psych): 1-2h workshop on Career Paths in Clinical Psychology led by Assistant Professor E. Nate Chapman. Attendance at Summer Research Program Brownbag seminars begins as does Coffee with a Professor, a way for program attendees to have informal career development conversations with Psychology professors. 
 
 #### Week 3 
 (STARS): GRE Prep; How to Write a Personal Statement for your Graduate Application 
+
 (Psych): Attendance at Summer Research Program Brownbag seminars and Coffee with a Professor.
  
 #### Week 4 
 (STARS): GRE Prep; UCSD Graduate Admissions Chairs present strategies for gaining graduate admission.
+
 (Psych): Attendance at Summer Research Program Brownbag seminars and Coffee with a Professor. 
 Mid-summer Taco Dinner with program students and affiliated labs.
   
 #### Week 5 
 (STARS): GRE Prep; Dinner and Dialogue with Graduate Students and Faculty; One-on-One Consultation with Graduate Admissions in department(s) of interest. 
+
 (Psych): Attendance at Summer Research Program Brownbag seminars and Coffee with a Professor. 
 
 #### Week 6
@@ -57,8 +62,10 @@ Mid-summer Taco Dinner with program students and affiliated labs.
 
 #### Week 7 
 (STARS): Keys to Success in Graduate School 
+
 (Psych): Practice research talks at Summer Research Program Brownbag seminar and Coffee with a Professor. 
 
 #### Week 8
-STARS: Summer Research Symposium:  Students present their research to an audience of faculty and peers.
-Psych: Goodbye Beach Bonfire 
+(STARS): Summer Research Symposium:  Students present their research to an audience of faculty and peers.
+
+(Psych): Goodbye Beach Bonfire 
