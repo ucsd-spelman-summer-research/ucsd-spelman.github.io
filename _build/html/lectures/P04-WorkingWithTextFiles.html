@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P04: Working with text files &#8212; UCSD CSS 1</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="P04: Reading and writing files" href="P04-files.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">UCSD CSS 1</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome to CSS 1
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Course (CSS 1 Winter 2022)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/expectations.html">
+   Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/datahub.html">
+   Datahub assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/debugging.html">
+   Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/resources.html">
+   Extracurricular Resources
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Content
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P01.html">
+   P01: Getting oriented
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-css.html">
+     P01: Computational Social Science
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-programming.html">
+     P01: programming concepts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-jupyter.html">
+     P01: Our environment
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-python.html">
+     P01:  Python syntax, variables, types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P02.html">
+   P02: Control flow and logic
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-conditionals.html">
+     P02: Branching via conditional statement: if..elif..else..
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-loops.html">
+     P02: Loops!
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-while.html">
+     P02: While loops
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P03.html">
+   P03: Sequence types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P03-sequence.html">
+     P03: Sequence types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="P04.html">
+   P04: Dictionaries, Sets, and File reading and writing (File I/O)
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-dictionaries.html">
+     P04: Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-sets.html">
+     P04: Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-files.html">
+     P04: Reading and writing files
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     P04: Working with text files
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/lectures/P04-WorkingWithTextFiles.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/UCSD-CSS-001/ucsd-css-001.github.io"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/UCSD-CSS-001/ucsd-css-001.github.io/issues/new?title=Issue%20on%20page%20%2Flectures/P04-WorkingWithTextFiles.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/UCSD-CSS-001/ucsd-css-001.github.io/master?urlpath=tree/lectures/P04-WorkingWithTextFiles.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find-a-target-string-and-then-keep-the-next-n-lines-of-text">
+   Find a target string and then keep the next N lines of text
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find-a-target-string-and-then-keep-the-next-n-lines-of-text-but-this-time-use-enumerate">
+   Find a target string and then keep the next N lines of text but this time use
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     enumerate
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counting-words-in-text">
+   Counting words in text…
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-slightly-more-compact-way-to-count-all-the-words-in-text-using-just-one-for-loop">
+   A slightly more compact way to count all the words in text using just one
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   loop
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find-the-most-common-word-in-text">
+   Find the most common word in text.
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="p04-working-with-text-files">
+<h1>P04: Working with text files<a class="headerlink" href="#p04-working-with-text-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="find-a-target-string-and-then-keep-the-next-n-lines-of-text">
+<h2>Find a target string and then keep the next N lines of text<a class="headerlink" href="#find-a-target-string-and-then-keep-the-next-n-lines-of-text" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Here we will read in txt from a book (Frankenstein by Mary Wollstonecraft (Godwin) Shelley)</p></li>
+<li><p>We’ll then search for a specific string in the book…in this case we’ll look for the first sentence of Chapter 5</p></li>
+<li><p>We’ll use <code class="docutils literal notranslate"><span class="pre">.readlines()</span></code> to read the book into a list, where each line of text from the book is an entry in the list (and remember, <code class="docutils literal notranslate"><span class="pre">.readlines()</span></code> is parsing the text based on where the <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> (newline) characters are).</p></li>
+<li><p>Then we’ll get rid of everything else in the book except for the few lines at the start of Chapter 5</p></li>
+<li><p>I will show you two methods…one using a counter that we initialize, and one using the <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> method that allows you to have a counter in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop that is initialized and incremented automatically.</p></li>
+<li><p>I’ll also show you the <code class="docutils literal notranslate"><span class="pre">break</span></code> syntax for a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. <code class="docutils literal notranslate"><span class="pre">break</span></code> allows you to exit the loop if a certain condition is met. In this case, we will exit the loop when we find the text that we’re looking for!</p></li>
+<li><p>Last - there are many ways to do this task…so don’t feel constrained by this approach when you’re working on the problem set…</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open our file for reading...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;frankenstein.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># read the entire file...with each line </span>
+    <span class="c1"># returned as a string in a list</span>
+    <span class="c1"># we&#39;ll call the list &#39;book&#39;</span>
+    <span class="n">book</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="c1"># now we can search the book for the text that we want, </span>
+<span class="c1"># which in this case is the first sentence of Chapter 5, which </span>
+<span class="c1"># starts with the string &#39;It was on a dreary night&#39; </span>
+<span class="n">search_target</span> <span class="o">=</span> <span class="s1">&#39;It was on a dreary night&#39;</span>
+
+<span class="c1"># how many lines of text do we want to keep </span>
+<span class="c1"># after we find the search target?</span>
+<span class="n">keep_lines</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># initialize a counter (int object)</span>
+<span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># loop over each line in the book</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">book</span><span class="p">:</span>
+    
+    <span class="c1"># test to see if the current line has search_target in it</span>
+    <span class="k">if</span> <span class="n">search_target</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="c1"># grab the line where chapter 5 starts</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="n">cnt</span>
+        
+        <span class="c1"># exit the for loop by calling &#39;break&#39;</span>
+        <span class="k">break</span>
+        
+    <span class="c1"># if the current line does not have our search_target</span>
+    <span class="c1"># then we&#39;ll increment the counter to keep track of how</span>
+    <span class="c1"># many lines we&#39;ve read...</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+<span class="c1"># now use slicing to just keep the first keep_lines lines </span>
+<span class="c1"># after the search_target</span>
+<span class="n">book</span> <span class="o">=</span> <span class="n">book</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">start_index</span> <span class="o">+</span> <span class="n">keep_lines</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+
+<span class="c1"># Related to ps3, Q1: How would you do the slicing if you </span>
+<span class="c1"># wanted to keep **all** of the text in the book after search_target?</span>
+<span class="c1"># And how would do the slicing if you wanted to keep all of the text</span>
+<span class="c1"># after the search_target while excluding the line that contained the </span>
+<span class="c1"># search_target? </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;It was on a dreary night of November that I beheld the accomplishment\n&#39;, &#39;of my toils. With an anxiety that almost amounted to agony, I\n&#39;, &#39;collected the instruments of life around me, that I might infuse a\n&#39;, &#39;spark of being into the lifeless thing that lay at my feet. It was\n&#39;, &#39;already one in the morning; the rain pattered dismally against the\n&#39;, &#39;panes, and my candle was nearly burnt out, when, by the glimmer of the\n&#39;, &#39;half-extinguished light, I saw the dull yellow eye of the creature\n&#39;, &#39;open; it breathed hard, and a convulsive motion agitated its limbs.\n&#39;, &#39;\n&#39;, &#39;How can I describe my emotions at this catastrophe, or how delineate\n&#39;, &#39;the wretch whom with such infinite pains and care I had endeavoured to\n&#39;, &#39;form? His limbs were in proportion, and I had selected his features as\n&#39;, &#39;beautiful. Beautiful! Great God! His yellow skin scarcely covered\n&#39;, &#39;the work of muscles and arteries beneath; his hair was of a lustrous\n&#39;, &#39;black, and flowing; his teeth of a pearly whiteness; but these\n&#39;, &#39;luxuriances only formed a more horrid contrast with his watery eyes,\n&#39;, &#39;that seemed almost of the same colour as the dun-white sockets in which\n&#39;, &#39;they were set, his shrivelled complexion and straight black lips.\n&#39;, &#39;\n&#39;, &#39;The different accidents of life are not so changeable as the feelings\n&#39;, &#39;of human nature. I had worked hard for nearly two years, for the sole\n&#39;, &#39;purpose of infusing life into an inanimate body. For this I had\n&#39;, &#39;deprived myself of rest and health. I had desired it with an ardour\n&#39;, &#39;that far exceeded moderation; but now that I had finished, the beauty\n&#39;, &#39;of the dream vanished, and breathless horror and disgust filled my\n&#39;, &#39;heart. Unable to endure the aspect of the being I had created, I\n&#39;, &#39;rushed out of the room and continued a long time traversing my\n&#39;, &#39;bed-chamber, unable to compose my mind to sleep. At length lassitude\n&#39;, &#39;succeeded to the tumult I had before endured, and I threw myself on the\n&#39;, &#39;bed in my clothes, endeavouring to seek a few moments of forgetfulness.\n&#39;, &#39;But it was in vain; I slept, indeed, but I was disturbed by the wildest\n&#39;, &#39;dreams. I thought I saw Elizabeth, in the bloom of health, walking in\n&#39;, &#39;the streets of Ingolstadt. Delighted and surprised, I embraced her,\n&#39;, &#39;but as I imprinted the first kiss on her lips, they became livid with\n&#39;, &#39;the hue of death; her features appeared to change, and I thought that I\n&#39;, &#39;held the corpse of my dead mother in my arms; a shroud enveloped her\n&#39;, &#39;form, and I saw the grave-worms crawling in the folds of the flannel.\n&#39;, &#39;I started from my sleep with horror; a cold dew covered my forehead, my\n&#39;, &#39;teeth chattered, and every limb became convulsed; when, by the dim and\n&#39;, &#39;yellow light of the moon, as it forced its way through the window\n&#39;, &#39;shutters, I beheld the wretch—the miserable monster whom I had\n&#39;, &#39;created. He held up the curtain of the bed; and his eyes, if eyes they\n&#39;, &#39;may be called, were fixed on me. His jaws opened, and he muttered some\n&#39;, &#39;inarticulate sounds, while a grin wrinkled his cheeks. He might have\n&#39;, &#39;spoken, but I did not hear; one hand was stretched out, seemingly to\n&#39;, &#39;detain me, but I escaped and rushed downstairs. I took refuge in the\n&#39;, &#39;courtyard belonging to the house which I inhabited, where I remained\n&#39;, &#39;during the rest of the night, walking up and down in the greatest\n&#39;, &#39;agitation, listening attentively, catching and fearing each sound as if\n&#39;, &#39;it were to announce the approach of the demoniacal corpse to which I\n&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="find-a-target-string-and-then-keep-the-next-n-lines-of-text-but-this-time-use-enumerate">
+<h2>Find a target string and then keep the next N lines of text but this time use <code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#find-a-target-string-and-then-keep-the-next-n-lines-of-text-but-this-time-use-enumerate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>See <a class="reference external" href="https://realpython.com/python-enumerate/">here</a> for a nice explanation…</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open our file for reading...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;frankenstein.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># read the entire file...with each line </span>
+    <span class="c1"># returned as a string in a list</span>
+    <span class="c1"># we&#39;ll call the list &#39;book&#39;</span>
+    <span class="n">book</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="c1"># now we can search the book for the text that we want, </span>
+<span class="c1"># which in this case is the first sentence of Chapter 5, which </span>
+<span class="c1"># starts with the string &#39;It was on a dreary night&#39; </span>
+<span class="n">search_target</span> <span class="o">=</span> <span class="s1">&#39;It was on a dreary night&#39;</span>
+
+<span class="c1"># how many lines of text do we want to keep </span>
+<span class="c1"># after we find the search target?</span>
+<span class="n">keep_lines</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># loop over each line in the book using enumerate</span>
+<span class="c1"># enumerate will automatically create and increment a counter </span>
+<span class="c1"># that we&#39;ll call &#39;cnt&#39; and it will give you each line</span>
+<span class="c1"># in the book just like a normal for loop. </span>
+<span class="k">for</span> <span class="n">cnt</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
+    
+    <span class="c1"># test to see if the current line has search_target in it</span>
+    <span class="k">if</span> <span class="n">search_target</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="c1"># grab the line where chapter 5 starts</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="n">cnt</span>
+        
+        <span class="c1"># exit the loop by calling &#39;break&#39;</span>
+        <span class="k">break</span>
+        
+
+<span class="c1"># now use slicing to just keep the first keep_lines lines </span>
+<span class="c1"># after the search_target</span>
+<span class="n">book</span> <span class="o">=</span> <span class="n">book</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">start_index</span> <span class="o">+</span> <span class="n">keep_lines</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+
+<span class="c1"># Related to ps3, Q1: How would you do the slicing if you </span>
+<span class="c1"># wanted to keep **all** of the text in the book after search_target?</span>
+<span class="c1"># And how would do the slicing if you wanted to keep all of the text</span>
+<span class="c1"># after the search_target while excluding the line that contained the </span>
+<span class="c1"># search_target? </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;It was on a dreary night of November that I beheld the accomplishment\n&#39;, &#39;of my toils. With an anxiety that almost amounted to agony, I\n&#39;, &#39;collected the instruments of life around me, that I might infuse a\n&#39;, &#39;spark of being into the lifeless thing that lay at my feet. It was\n&#39;, &#39;already one in the morning; the rain pattered dismally against the\n&#39;, &#39;panes, and my candle was nearly burnt out, when, by the glimmer of the\n&#39;, &#39;half-extinguished light, I saw the dull yellow eye of the creature\n&#39;, &#39;open; it breathed hard, and a convulsive motion agitated its limbs.\n&#39;, &#39;\n&#39;, &#39;How can I describe my emotions at this catastrophe, or how delineate\n&#39;, &#39;the wretch whom with such infinite pains and care I had endeavoured to\n&#39;, &#39;form? His limbs were in proportion, and I had selected his features as\n&#39;, &#39;beautiful. Beautiful! Great God! His yellow skin scarcely covered\n&#39;, &#39;the work of muscles and arteries beneath; his hair was of a lustrous\n&#39;, &#39;black, and flowing; his teeth of a pearly whiteness; but these\n&#39;, &#39;luxuriances only formed a more horrid contrast with his watery eyes,\n&#39;, &#39;that seemed almost of the same colour as the dun-white sockets in which\n&#39;, &#39;they were set, his shrivelled complexion and straight black lips.\n&#39;, &#39;\n&#39;, &#39;The different accidents of life are not so changeable as the feelings\n&#39;, &#39;of human nature. I had worked hard for nearly two years, for the sole\n&#39;, &#39;purpose of infusing life into an inanimate body. For this I had\n&#39;, &#39;deprived myself of rest and health. I had desired it with an ardour\n&#39;, &#39;that far exceeded moderation; but now that I had finished, the beauty\n&#39;, &#39;of the dream vanished, and breathless horror and disgust filled my\n&#39;, &#39;heart. Unable to endure the aspect of the being I had created, I\n&#39;, &#39;rushed out of the room and continued a long time traversing my\n&#39;, &#39;bed-chamber, unable to compose my mind to sleep. At length lassitude\n&#39;, &#39;succeeded to the tumult I had before endured, and I threw myself on the\n&#39;, &#39;bed in my clothes, endeavouring to seek a few moments of forgetfulness.\n&#39;, &#39;But it was in vain; I slept, indeed, but I was disturbed by the wildest\n&#39;, &#39;dreams. I thought I saw Elizabeth, in the bloom of health, walking in\n&#39;, &#39;the streets of Ingolstadt. Delighted and surprised, I embraced her,\n&#39;, &#39;but as I imprinted the first kiss on her lips, they became livid with\n&#39;, &#39;the hue of death; her features appeared to change, and I thought that I\n&#39;, &#39;held the corpse of my dead mother in my arms; a shroud enveloped her\n&#39;, &#39;form, and I saw the grave-worms crawling in the folds of the flannel.\n&#39;, &#39;I started from my sleep with horror; a cold dew covered my forehead, my\n&#39;, &#39;teeth chattered, and every limb became convulsed; when, by the dim and\n&#39;, &#39;yellow light of the moon, as it forced its way through the window\n&#39;, &#39;shutters, I beheld the wretch—the miserable monster whom I had\n&#39;, &#39;created. He held up the curtain of the bed; and his eyes, if eyes they\n&#39;, &#39;may be called, were fixed on me. His jaws opened, and he muttered some\n&#39;, &#39;inarticulate sounds, while a grin wrinkled his cheeks. He might have\n&#39;, &#39;spoken, but I did not hear; one hand was stretched out, seemingly to\n&#39;, &#39;detain me, but I escaped and rushed downstairs. I took refuge in the\n&#39;, &#39;courtyard belonging to the house which I inhabited, where I remained\n&#39;, &#39;during the rest of the night, walking up and down in the greatest\n&#39;, &#39;agitation, listening attentively, catching and fearing each sound as if\n&#39;, &#39;it were to announce the approach of the demoniacal corpse to which I\n&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="counting-words-in-text">
+<h2>Counting words in text…<a class="headerlink" href="#counting-words-in-text" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Here we can count the occurence of each word in the book (or in the part of the book that you have left after slicing the book list in the code cell above).</p></li>
+<li><p>Notice that there are some empty strings <code class="docutils literal notranslate"><span class="pre">''</span></code> in the list that we need to deal with (i.e. things that are not words, so we need to check for these so they don’t get counted). We can do that in a few ways that I’ll write out below.</p></li>
+<li><p>Our general algorithm here will be:</p>
+<ul>
+<li><p>convert the list to a string to make it easier to clean</p></li>
+<li><p>remove the newline characters using the <code class="docutils literal notranslate"><span class="pre">.replace()</span></code> method (and if you are working with a string that has other stuff in it that you don’t want you can define a string with all the unwanted characters and loop over each_letter in that string to <code class="docutils literal notranslate"><span class="pre">.replace()</span></code> each unwanted character using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop).</p></li>
+<li><p>convert back to a list</p></li>
+<li><p>initialize an empty dictionary</p></li>
+<li><p>loop over all unique words in the book - use <code class="docutils literal notranslate"><span class="pre">set</span></code> to get the unique words</p>
+<ul>
+<li><p>in this loop check to make sure we’re not considering the empty strings <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+<li><p>whenever we find a real word, create a new <code class="docutils literal notranslate"><span class="pre">key:value</span></code> pair in a dictionary with the word as the <code class="docutils literal notranslate"><span class="pre">key</span></code> and an initial value of <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p>Now that the dictionary is set up and we have one key for each unique word, we can loop over <strong>all</strong> the words in the book, including repeated words, and increment the <code class="docutils literal notranslate"><span class="pre">value</span></code> associated with each <code class="docutils literal notranslate"><span class="pre">key</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># turn the book list into a string to make it easier to remove things we don&#39;t want (like newline </span>
+<span class="c1"># characters)</span>
+<span class="n">book_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+
+<span class="c1"># convert to lower case</span>
+<span class="n">book_str</span> <span class="o">=</span> <span class="n">book_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># clean out the newline characters</span>
+<span class="n">book_str</span> <span class="o">=</span> <span class="n">book_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="c1"># turn back into a list based on the location of spaces</span>
+<span class="n">book_lst_clean</span> <span class="o">=</span> <span class="n">book_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="c1"># init a dictionary with a key for each unique </span>
+<span class="c1"># word, and 0 for the starting count</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">book_lst_clean</span><span class="p">):</span>
+    <span class="c1"># because there are some empty strings in our list</span>
+    <span class="c1"># we can check here and we&#39;ll skip them </span>
+    <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">wc</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># now loop over **all** words in the book, even the repeated words</span>
+<span class="c1"># and count them up!</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">book_lst_clean</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">wc</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># have a look at the dictionary...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;they&#39;: 3, &#39;forehead,&#39;: 1, &#39;tumult&#39;: 1, &#39;down&#39;: 1, &#39;while&#39;: 1, &#39;at&#39;: 3, &#39;burnt&#39;: 1, &#39;hard,&#39;: 1, &#39;or&#39;: 1, &#39;body.&#39;: 1, &#39;fearing&#39;: 1, &#39;clothes,&#39;: 1, &#39;curtain&#39;: 1, &#39;as&#39;: 6, &#39;each&#39;: 1, &#39;vanished,&#39;: 1, &#39;folds&#39;: 1, &#39;opened,&#39;: 1, &#39;downstairs.&#39;: 1, &#39;endeavouring&#39;: 1, &#39;vain;&#39;: 1, &#39;hear;&#39;: 1, &#39;features&#39;: 2, &#39;beneath;&#39;: 1, &#39;accidents&#39;: 1, &#39;beautiful.&#39;: 1, &#39;changeable&#39;: 1, &#39;moderation;&#39;: 1, &#39;traversing&#39;: 1, &#39;some&#39;: 1, &#39;stretched&#39;: 1, &#39;nearly&#39;: 2, &#39;finished,&#39;: 1, &#39;one&#39;: 2, &#39;formed&#39;: 1, &#39;endured,&#39;: 1, &#39;ardour&#39;: 1, &#39;detain&#39;: 1, &#39;were&#39;: 4, &#39;covered&#39;: 2, &#39;by&#39;: 3, &#39;light&#39;: 1, &#39;breathless&#39;: 1, &#39;sleep.&#39;: 1, &#39;refuge&#39;: 1, &#39;hand&#39;: 1, &#39;bed;&#39;: 1, &#39;endure&#39;: 1, &#39;worked&#39;: 1, &#39;only&#39;: 1, &#39;if&#39;: 2, &#39;out,&#39;: 2, &#39;first&#39;: 1, &#39;imprinted&#39;: 1, &#39;wrinkled&#39;: 1, &#39;did&#39;: 1, &#39;jaws&#39;: 1, &#39;was&#39;: 7, &#39;panes,&#39;: 1, &#39;room&#39;: 1, &#39;different&#39;: 1, &#39;dreams.&#39;: 1, &#39;pains&#39;: 1, &#39;of&#39;: 27, &#39;corpse&#39;: 2, &#39;hard&#39;: 1, &#39;every&#39;: 1, &#39;lassitude&#39;: 1, &#39;beheld&#39;: 2, &#39;appeared&#39;: 1, &#39;threw&#39;: 1, &#39;limbs.&#39;: 1, &#39;proportion,&#39;: 1, &#39;few&#39;: 1, &#39;bloom&#39;: 1, &#39;wretch—the&#39;: 1, &#39;her,&#39;: 1, &#39;attentively,&#39;: 1, &#39;thing&#39;: 1, &#39;describe&#39;: 1, &#39;contrast&#39;: 1, &#39;already&#39;: 1, &#39;dull&#39;: 1, &#39;health,&#39;: 1, &#39;death;&#39;: 1, &#39;grave-worms&#39;: 1, &#39;inhabited,&#39;: 1, &#39;the&#39;: 46, &#39;pattered&#39;: 1, &#39;half-extinguished&#39;: 1, &#39;complexion&#39;: 1, &#39;human&#39;: 1, &#39;me.&#39;: 1, &#39;rest&#39;: 2, &#39;mind&#39;: 1, &#39;breathed&#39;: 1, &#39;might&#39;: 2, &#39;sole&#39;: 1, &#39;bed-chamber,&#39;: 1, &#39;pearly&#39;: 1, &#39;dew&#39;: 1, &#39;where&#39;: 1, &#39;far&#39;: 1, &#39;toils.&#39;: 1, &#39;indeed,&#39;: 1, &#39;flannel.&#39;: 1, &#39;way&#39;: 1, &#39;filled&#39;: 1, &#39;rushed&#39;: 2, &#39;monster&#39;: 1, &#39;years,&#39;: 1, &#39;feelings&#39;: 1, &#39;during&#39;: 1, &#39;into&#39;: 2, &#39;change,&#39;: 1, &#39;rain&#39;: 1, &#39;created.&#39;: 1, &#39;endeavoured&#39;: 1, &#39;not&#39;: 2, &#39;limbs&#39;: 1, &#39;to&#39;: 12, &#39;arms;&#39;: 1, &#39;black,&#39;: 1, &#39;horror;&#39;: 1, &#39;disgust&#39;: 1, &#39;flowing;&#39;: 1, &#39;through&#39;: 1, &#39;aspect&#39;: 1, &#39;his&#39;: 10, &#39;glimmer&#39;: 1, &#39;dismally&#39;: 1, &#39;teeth&#39;: 2, &#39;agitation,&#39;: 1, &#39;enveloped&#39;: 1, &#39;saw&#39;: 3, &#39;in&#39;: 11, &#39;i&#39;: 33, &#39;lips.&#39;: 1, &#39;whom&#39;: 2, &#39;infinite&#39;: 1, &#39;when,&#39;: 2, &#39;agitated&#39;: 1, &#39;demoniacal&#39;: 1, &#39;cheeks.&#39;: 1, &#39;moments&#39;: 1, &#39;eyes&#39;: 1, &#39;be&#39;: 1, &#39;how&#39;: 2, &#39;elizabeth,&#39;: 1, &#39;long&#39;: 1, &#39;eye&#39;: 1, &#39;health.&#39;: 1, &#39;wildest&#39;: 1, &#39;light,&#39;: 1, &#39;shutters,&#39;: 1, &#39;limb&#39;: 1, &#39;lustrous&#39;: 1, &#39;walking&#39;: 2, &#39;and&#39;: 22, &#39;these&#39;: 1, &#39;deprived&#39;: 1, &#39;heart.&#39;: 1, &#39;scarcely&#39;: 1, &#39;life&#39;: 3, &#39;myself&#39;: 2, &#39;up&#39;: 2, &#39;hair&#39;: 1, &#39;seek&#39;: 1, &#39;instruments&#39;: 1, &#39;lifeless&#39;: 1, &#39;infuse&#39;: 1, &#39;candle&#39;: 1, &#39;beauty&#39;: 1, &#39;luxuriances&#39;: 1, &#39;mother&#39;: 1, &#39;seemingly&#39;: 1, &#39;compose&#39;: 1, &#39;set,&#39;: 1, &#39;approach&#39;: 1, &#39;greatest&#39;: 1, &#39;slept,&#39;: 1, &#39;creature&#39;: 1, &#39;a&#39;: 11, &#39;form,&#39;: 1, &#39;inanimate&#39;: 1, &#39;catastrophe,&#39;: 1, &#39;lips,&#39;: 1, &#39;beautiful!&#39;: 1, &#39;embraced&#39;: 1, &#39;convulsive&#39;: 1, &#39;straight&#39;: 1, &#39;feet.&#39;: 1, &#39;are&#39;: 1, &#39;with&#39;: 6, &#39;emotions&#39;: 1, &#39;continued&#39;: 1, &#39;but&#39;: 7, &#39;shroud&#39;: 1, &#39;disturbed&#39;: 1, &#39;spoken,&#39;: 1, &#39;almost&#39;: 2, &#39;on&#39;: 4, &#39;succeeded&#39;: 1, &#39;unable&#39;: 2, &#39;dream&#39;: 1, &#39;my&#39;: 13, &#39;desired&#39;: 1, &#39;being&#39;: 2, &#39;an&#39;: 3, &#39;before&#39;: 1, &#39;dead&#39;: 1, &#39;me,&#39;: 2, &#39;belonging&#39;: 1, &#39;sleep&#39;: 1, &#39;time&#39;: 1, &#39;her&#39;: 3, &#39;open;&#39;: 1, &#39;horrid&#39;: 1, &#39;against&#39;: 1, &#39;delighted&#39;: 1, &#39;colour&#39;: 1, &#39;form?&#39;: 1, &#39;bed&#39;: 1, &#39;spark&#39;: 1, &#39;anxiety&#39;: 1, &#39;kiss&#39;: 1, &#39;around&#39;: 1, &#39;whiteness;&#39;: 1, &#39;such&#39;: 1, &#39;chattered,&#39;: 1, &#39;exceeded&#39;: 1, &#39;muscles&#39;: 1, &#39;amounted&#39;: 1, &#39;from&#39;: 1, &#39;yellow&#39;: 3, &#39;grin&#39;: 1, &#39;accomplishment&#39;: 1, &#39;its&#39;: 2, &#39;skin&#39;: 1, &#39;two&#39;: 1, &#39;dim&#39;: 1, &#39;horror&#39;: 1, &#39;motion&#39;: 1, &#39;that&#39;: 8, &#39;morning;&#39;: 1, &#39;surprised,&#39;: 1, &#39;wretch&#39;: 1, &#39;watery&#39;: 1, &#39;listening&#39;: 1, &#39;black&#39;: 1, &#39;sockets&#39;: 1, &#39;called,&#39;: 1, &#39;seemed&#39;: 1, &#39;work&#39;: 1, &#39;catching&#39;: 1, &#39;thought&#39;: 2, &#39;he&#39;: 3, &#39;forced&#39;: 1, &#39;sound&#39;: 1, &#39;held&#39;: 2, &#39;livid&#39;: 1, &#39;which&#39;: 3, &#39;november&#39;: 1, &#39;care&#39;: 1, &#39;ingolstadt.&#39;: 1, &#39;night,&#39;: 1, &#39;may&#39;: 1, &#39;started&#39;: 1, &#39;so&#39;: 1, &#39;god!&#39;: 1, &#39;out&#39;: 1, &#39;took&#39;: 1, &#39;announce&#39;: 1, &#39;have&#39;: 1, &#39;hue&#39;: 1, &#39;it&#39;: 7, &#39;house&#39;: 1, &#39;inarticulate&#39;: 1, &#39;for&#39;: 3, &#39;courtyard&#39;: 1, &#39;delineate&#39;: 1, &#39;window&#39;: 1, &#39;remained&#39;: 1, &#39;lay&#39;: 1, &#39;had&#39;: 9, &#39;moon,&#39;: 1, &#39;collected&#39;: 1, &#39;eyes,&#39;: 2, &#39;arteries&#39;: 1, &#39;same&#39;: 1, &#39;more&#39;: 1, &#39;crawling&#39;: 1, &#39;now&#39;: 1, &#39;great&#39;: 1, &#39;agony,&#39;: 1, &#39;muttered&#39;: 1, &#39;created,&#39;: 1, &#39;convulsed;&#39;: 1, &#39;this&#39;: 2, &#39;selected&#39;: 1, &#39;fixed&#39;: 1, &#39;night&#39;: 1, &#39;sounds,&#39;: 1, &#39;became&#39;: 2, &#39;escaped&#39;: 1, &#39;dun-white&#39;: 1, &#39;dreary&#39;: 1, &#39;shrivelled&#39;: 1, &#39;forgetfulness.&#39;: 1, &#39;nature.&#39;: 1, &#39;streets&#39;: 1, &#39;can&#39;: 1, &#39;miserable&#39;: 1, &#39;purpose&#39;: 1, &#39;infusing&#39;: 1, &#39;length&#39;: 1, &#39;cold&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="a-slightly-more-compact-way-to-count-all-the-words-in-text-using-just-one-for-loop">
+<h2>A slightly more compact way to count all the words in text using just one <code class="docutils literal notranslate"><span class="pre">for</span></code> loop<a class="headerlink" href="#a-slightly-more-compact-way-to-count-all-the-words-in-text-using-just-one-for-loop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This might be easier to understand (or it might be harder) so just writing it out in case it helps…</p></li>
+<li><p>I am using the <code class="docutils literal notranslate"><span class="pre">continue</span></code> statement (see below)…</p></li>
+<li><p>Note that there are several other ways you could achieve the same result, so long as you are checking to make sure that the current word is not an empty string <code class="docutils literal notranslate"><span class="pre">''</span></code> somehow</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># turn the book list into a string to make it easier to remove things we don&#39;t want (like newline </span>
+<span class="c1"># characters)</span>
+<span class="n">book_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+
+<span class="c1"># convert to lower case</span>
+<span class="n">book_str</span> <span class="o">=</span> <span class="n">book_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># clean out the newline characters</span>
+<span class="n">book_str</span> <span class="o">=</span> <span class="n">book_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="c1"># turn back into a list based on the location of spaces</span>
+<span class="n">book_lst_clean</span> <span class="o">=</span> <span class="n">book_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="c1"># init an empty dictionary</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># or you can use dict()</span>
+
+<span class="c1"># now loop over **all** words in the book, even the repeated words</span>
+<span class="c1"># and count them up!</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">book_lst_clean</span><span class="p">:</span>
+    
+    <span class="c1"># if w is not a word (i.e. it is an empty string)</span>
+    <span class="c1"># then continue, where continue means &quot;go back to the </span>
+    <span class="c1"># top of the for loop and skip the rest of the code in</span>
+    <span class="c1"># the loop&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span><span class="p">:</span>
+        <span class="k">continue</span>
+    
+    <span class="c1"># if w is a word, and its not already in our dictionary</span>
+    <span class="c1"># then make a new key and assign a value of 0</span>
+    <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">wc</span><span class="p">:</span>
+        <span class="n">wc</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c1"># increment a counter each time the word w appears...</span>
+    <span class="c1"># note that you only get to this line of code if w</span>
+    <span class="c1"># is indeed a word (the if not w: continue</span>
+    <span class="c1"># line above will prevent you from getting here if w is</span>
+    <span class="c1"># not a word)</span>
+    <span class="n">wc</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># have a look at the dictionary...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;it&#39;: 7, &#39;was&#39;: 7, &#39;on&#39;: 4, &#39;a&#39;: 11, &#39;dreary&#39;: 1, &#39;night&#39;: 1, &#39;of&#39;: 27, &#39;november&#39;: 1, &#39;that&#39;: 8, &#39;i&#39;: 33, &#39;beheld&#39;: 2, &#39;the&#39;: 46, &#39;accomplishment&#39;: 1, &#39;my&#39;: 13, &#39;toils.&#39;: 1, &#39;with&#39;: 6, &#39;an&#39;: 3, &#39;anxiety&#39;: 1, &#39;almost&#39;: 2, &#39;amounted&#39;: 1, &#39;to&#39;: 12, &#39;agony,&#39;: 1, &#39;collected&#39;: 1, &#39;instruments&#39;: 1, &#39;life&#39;: 3, &#39;around&#39;: 1, &#39;me,&#39;: 2, &#39;might&#39;: 2, &#39;infuse&#39;: 1, &#39;spark&#39;: 1, &#39;being&#39;: 2, &#39;into&#39;: 2, &#39;lifeless&#39;: 1, &#39;thing&#39;: 1, &#39;lay&#39;: 1, &#39;at&#39;: 3, &#39;feet.&#39;: 1, &#39;already&#39;: 1, &#39;one&#39;: 2, &#39;in&#39;: 11, &#39;morning;&#39;: 1, &#39;rain&#39;: 1, &#39;pattered&#39;: 1, &#39;dismally&#39;: 1, &#39;against&#39;: 1, &#39;panes,&#39;: 1, &#39;and&#39;: 22, &#39;candle&#39;: 1, &#39;nearly&#39;: 2, &#39;burnt&#39;: 1, &#39;out,&#39;: 2, &#39;when,&#39;: 2, &#39;by&#39;: 3, &#39;glimmer&#39;: 1, &#39;half-extinguished&#39;: 1, &#39;light,&#39;: 1, &#39;saw&#39;: 3, &#39;dull&#39;: 1, &#39;yellow&#39;: 3, &#39;eye&#39;: 1, &#39;creature&#39;: 1, &#39;open;&#39;: 1, &#39;breathed&#39;: 1, &#39;hard,&#39;: 1, &#39;convulsive&#39;: 1, &#39;motion&#39;: 1, &#39;agitated&#39;: 1, &#39;its&#39;: 2, &#39;limbs.&#39;: 1, &#39;how&#39;: 2, &#39;can&#39;: 1, &#39;describe&#39;: 1, &#39;emotions&#39;: 1, &#39;this&#39;: 2, &#39;catastrophe,&#39;: 1, &#39;or&#39;: 1, &#39;delineate&#39;: 1, &#39;wretch&#39;: 1, &#39;whom&#39;: 2, &#39;such&#39;: 1, &#39;infinite&#39;: 1, &#39;pains&#39;: 1, &#39;care&#39;: 1, &#39;had&#39;: 9, &#39;endeavoured&#39;: 1, &#39;form?&#39;: 1, &#39;his&#39;: 10, &#39;limbs&#39;: 1, &#39;were&#39;: 4, &#39;proportion,&#39;: 1, &#39;selected&#39;: 1, &#39;features&#39;: 2, &#39;as&#39;: 6, &#39;beautiful.&#39;: 1, &#39;beautiful!&#39;: 1, &#39;great&#39;: 1, &#39;god!&#39;: 1, &#39;skin&#39;: 1, &#39;scarcely&#39;: 1, &#39;covered&#39;: 2, &#39;work&#39;: 1, &#39;muscles&#39;: 1, &#39;arteries&#39;: 1, &#39;beneath;&#39;: 1, &#39;hair&#39;: 1, &#39;lustrous&#39;: 1, &#39;black,&#39;: 1, &#39;flowing;&#39;: 1, &#39;teeth&#39;: 2, &#39;pearly&#39;: 1, &#39;whiteness;&#39;: 1, &#39;but&#39;: 7, &#39;these&#39;: 1, &#39;luxuriances&#39;: 1, &#39;only&#39;: 1, &#39;formed&#39;: 1, &#39;more&#39;: 1, &#39;horrid&#39;: 1, &#39;contrast&#39;: 1, &#39;watery&#39;: 1, &#39;eyes,&#39;: 2, &#39;seemed&#39;: 1, &#39;same&#39;: 1, &#39;colour&#39;: 1, &#39;dun-white&#39;: 1, &#39;sockets&#39;: 1, &#39;which&#39;: 3, &#39;they&#39;: 3, &#39;set,&#39;: 1, &#39;shrivelled&#39;: 1, &#39;complexion&#39;: 1, &#39;straight&#39;: 1, &#39;black&#39;: 1, &#39;lips.&#39;: 1, &#39;different&#39;: 1, &#39;accidents&#39;: 1, &#39;are&#39;: 1, &#39;not&#39;: 2, &#39;so&#39;: 1, &#39;changeable&#39;: 1, &#39;feelings&#39;: 1, &#39;human&#39;: 1, &#39;nature.&#39;: 1, &#39;worked&#39;: 1, &#39;hard&#39;: 1, &#39;for&#39;: 3, &#39;two&#39;: 1, &#39;years,&#39;: 1, &#39;sole&#39;: 1, &#39;purpose&#39;: 1, &#39;infusing&#39;: 1, &#39;inanimate&#39;: 1, &#39;body.&#39;: 1, &#39;deprived&#39;: 1, &#39;myself&#39;: 2, &#39;rest&#39;: 2, &#39;health.&#39;: 1, &#39;desired&#39;: 1, &#39;ardour&#39;: 1, &#39;far&#39;: 1, &#39;exceeded&#39;: 1, &#39;moderation;&#39;: 1, &#39;now&#39;: 1, &#39;finished,&#39;: 1, &#39;beauty&#39;: 1, &#39;dream&#39;: 1, &#39;vanished,&#39;: 1, &#39;breathless&#39;: 1, &#39;horror&#39;: 1, &#39;disgust&#39;: 1, &#39;filled&#39;: 1, &#39;heart.&#39;: 1, &#39;unable&#39;: 2, &#39;endure&#39;: 1, &#39;aspect&#39;: 1, &#39;created,&#39;: 1, &#39;rushed&#39;: 2, &#39;out&#39;: 1, &#39;room&#39;: 1, &#39;continued&#39;: 1, &#39;long&#39;: 1, &#39;time&#39;: 1, &#39;traversing&#39;: 1, &#39;bed-chamber,&#39;: 1, &#39;compose&#39;: 1, &#39;mind&#39;: 1, &#39;sleep.&#39;: 1, &#39;length&#39;: 1, &#39;lassitude&#39;: 1, &#39;succeeded&#39;: 1, &#39;tumult&#39;: 1, &#39;before&#39;: 1, &#39;endured,&#39;: 1, &#39;threw&#39;: 1, &#39;bed&#39;: 1, &#39;clothes,&#39;: 1, &#39;endeavouring&#39;: 1, &#39;seek&#39;: 1, &#39;few&#39;: 1, &#39;moments&#39;: 1, &#39;forgetfulness.&#39;: 1, &#39;vain;&#39;: 1, &#39;slept,&#39;: 1, &#39;indeed,&#39;: 1, &#39;disturbed&#39;: 1, &#39;wildest&#39;: 1, &#39;dreams.&#39;: 1, &#39;thought&#39;: 2, &#39;elizabeth,&#39;: 1, &#39;bloom&#39;: 1, &#39;health,&#39;: 1, &#39;walking&#39;: 2, &#39;streets&#39;: 1, &#39;ingolstadt.&#39;: 1, &#39;delighted&#39;: 1, &#39;surprised,&#39;: 1, &#39;embraced&#39;: 1, &#39;her,&#39;: 1, &#39;imprinted&#39;: 1, &#39;first&#39;: 1, &#39;kiss&#39;: 1, &#39;her&#39;: 3, &#39;lips,&#39;: 1, &#39;became&#39;: 2, &#39;livid&#39;: 1, &#39;hue&#39;: 1, &#39;death;&#39;: 1, &#39;appeared&#39;: 1, &#39;change,&#39;: 1, &#39;held&#39;: 2, &#39;corpse&#39;: 2, &#39;dead&#39;: 1, &#39;mother&#39;: 1, &#39;arms;&#39;: 1, &#39;shroud&#39;: 1, &#39;enveloped&#39;: 1, &#39;form,&#39;: 1, &#39;grave-worms&#39;: 1, &#39;crawling&#39;: 1, &#39;folds&#39;: 1, &#39;flannel.&#39;: 1, &#39;started&#39;: 1, &#39;from&#39;: 1, &#39;sleep&#39;: 1, &#39;horror;&#39;: 1, &#39;cold&#39;: 1, &#39;dew&#39;: 1, &#39;forehead,&#39;: 1, &#39;chattered,&#39;: 1, &#39;every&#39;: 1, &#39;limb&#39;: 1, &#39;convulsed;&#39;: 1, &#39;dim&#39;: 1, &#39;light&#39;: 1, &#39;moon,&#39;: 1, &#39;forced&#39;: 1, &#39;way&#39;: 1, &#39;through&#39;: 1, &#39;window&#39;: 1, &#39;shutters,&#39;: 1, &#39;wretch—the&#39;: 1, &#39;miserable&#39;: 1, &#39;monster&#39;: 1, &#39;created.&#39;: 1, &#39;he&#39;: 3, &#39;up&#39;: 2, &#39;curtain&#39;: 1, &#39;bed;&#39;: 1, &#39;if&#39;: 2, &#39;eyes&#39;: 1, &#39;may&#39;: 1, &#39;be&#39;: 1, &#39;called,&#39;: 1, &#39;fixed&#39;: 1, &#39;me.&#39;: 1, &#39;jaws&#39;: 1, &#39;opened,&#39;: 1, &#39;muttered&#39;: 1, &#39;some&#39;: 1, &#39;inarticulate&#39;: 1, &#39;sounds,&#39;: 1, &#39;while&#39;: 1, &#39;grin&#39;: 1, &#39;wrinkled&#39;: 1, &#39;cheeks.&#39;: 1, &#39;have&#39;: 1, &#39;spoken,&#39;: 1, &#39;did&#39;: 1, &#39;hear;&#39;: 1, &#39;hand&#39;: 1, &#39;stretched&#39;: 1, &#39;seemingly&#39;: 1, &#39;detain&#39;: 1, &#39;escaped&#39;: 1, &#39;downstairs.&#39;: 1, &#39;took&#39;: 1, &#39;refuge&#39;: 1, &#39;courtyard&#39;: 1, &#39;belonging&#39;: 1, &#39;house&#39;: 1, &#39;inhabited,&#39;: 1, &#39;where&#39;: 1, &#39;remained&#39;: 1, &#39;during&#39;: 1, &#39;night,&#39;: 1, &#39;down&#39;: 1, &#39;greatest&#39;: 1, &#39;agitation,&#39;: 1, &#39;listening&#39;: 1, &#39;attentively,&#39;: 1, &#39;catching&#39;: 1, &#39;fearing&#39;: 1, &#39;each&#39;: 1, &#39;sound&#39;: 1, &#39;announce&#39;: 1, &#39;approach&#39;: 1, &#39;demoniacal&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="find-the-most-common-word-in-text">
+<h2>Find the most common word in text.<a class="headerlink" href="#find-the-most-common-word-in-text" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>To find the most common word, you can loop over our word count dictionary (<code class="docutils literal notranslate"><span class="pre">wc</span></code>, defined above)</p></li>
+<li><p>Basic approach:</p>
+<ul>
+<li><p>Initialize a counter (lets call it <code class="docutils literal notranslate"><span class="pre">max_count</span></code>) to <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p>Loop over <code class="docutils literal notranslate"><span class="pre">key:value</span></code> pairs in <code class="docutils literal notranslate"><span class="pre">wc</span></code> using the <code class="docutils literal notranslate"><span class="pre">.items()</span></code> method</p></li>
+<li><p>If the current <code class="docutils literal notranslate"><span class="pre">value</span></code> exceeds <code class="docutils literal notranslate"><span class="pre">max_count</span></code>, then update <code class="docutils literal notranslate"><span class="pre">max_count</span></code> with that value and also store the current <code class="docutils literal notranslate"><span class="pre">key</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init max_count to 0</span>
+<span class="n">max_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># loop over the key:value pairs in wc</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">wc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    
+    <span class="c1"># if the current value exceeds the previous value of </span>
+    <span class="c1"># max_count, then reassign max_count to the current value</span>
+    <span class="c1"># and save the associated key (which is the actual word)</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">max_count</span><span class="p">:</span>
+        <span class="n">max_count</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">most_common_word</span> <span class="o">=</span> <span class="n">k</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The most common word is &quot;</span><span class="si">{</span><span class="n">most_common_word</span><span class="si">}</span><span class="s1">&quot;, it occured </span><span class="si">{</span><span class="n">max_count</span><span class="si">}</span><span class="s1"> times&#39;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The most common word is &quot;the&quot;, it occured 46 times
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="P04-files.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">P04: Reading and writing files</p>
+        </div>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By John Serences for Winter 2022 (based on initial design by Ed Vul for SS2, 2021)<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

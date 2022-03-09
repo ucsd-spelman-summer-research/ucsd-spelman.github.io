@@ -1,0 +1,940 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P04: Dictionaries &#8212; UCSD CSS 1</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="P04: Sets" href="P04-sets.html" />
+    <link rel="prev" title="P04: Dictionaries, Sets, and File reading and writing (File I/O)" href="P04.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">UCSD CSS 1</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome to CSS 1
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Course (CSS 1 Winter 2022)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/expectations.html">
+   Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/datahub.html">
+   Datahub assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/debugging.html">
+   Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/resources.html">
+   Extracurricular Resources
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Content
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P01.html">
+   P01: Getting oriented
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-css.html">
+     P01: Computational Social Science
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-programming.html">
+     P01: programming concepts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-jupyter.html">
+     P01: Our environment
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-python.html">
+     P01:  Python syntax, variables, types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P02.html">
+   P02: Control flow and logic
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-conditionals.html">
+     P02: Branching via conditional statement: if..elif..else..
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-loops.html">
+     P02: Loops!
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-while.html">
+     P02: While loops
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P03.html">
+   P03: Sequence types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P03-sequence.html">
+     P03: Sequence types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="P04.html">
+   P04: Dictionaries, Sets, and File reading and writing (File I/O)
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     P04: Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-sets.html">
+     P04: Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-files.html">
+     P04: Reading and writing files
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/lectures/P04-dictionaries.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/UCSD-CSS-001/ucsd-css-001.github.io"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/UCSD-CSS-001/ucsd-css-001.github.io/issues/new?title=Issue%20on%20page%20%2Flectures/P04-dictionaries.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/UCSD-CSS-001/ucsd-css-001.github.io/master?urlpath=tree/lectures/P04-dictionaries.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dictionaries">
+   Dictionaries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#init-using-dict">
+     Init using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       dict()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-alternate-ways-to-achieve-the-same-thing-as-above">
+     Two alternate ways to achieve the same thing as above
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary-elements-can-be-accessed-via-their-keys">
+     Dictionary elements can be accessed via their keys.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#items-can-be-added-to-dictionaries-by-assigning-to-new-keys">
+     Items can be added to dictionaries by assigning to new keys,
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionaries-can-be-updated-with-update-which-will-add-new-keys-and-update-the-values-of-existing-keys">
+     Dictionaries can be updated with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .update()
+      </span>
+     </code>
+     , which will add new keys, and update the values of existing keys.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#elements-of-dictionaries-can-be-deleted-with-the-del-keyword">
+     Elements of dictionaries can be deleted with the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       del
+      </span>
+     </code>
+     keyword:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keys-values-items">
+   Keys, Values, Items
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#you-can-get-or-iterate-over-just-the-keys-with-keys">
+     You can get (or iterate over) just the keys with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .keys()
+      </span>
+     </code>
+     .
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#you-can-get-just-the-values-with-values">
+     You can get just the values with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .values()
+      </span>
+     </code>
+     .
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#you-can-get-key-value-pairs-as-tuples-with-items">
+     You can get key-value pairs (as tuples) with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .items()
+      </span>
+     </code>
+     .
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#it-is-often-useful-to-do-assignment-unpacking-or-to-unpack-the-key-value-tuple-into-two-variables">
+     It is often useful to do
+     <strong>
+      assignment unpacking
+     </strong>
+     , or to unpack the (key,value) tuple into two variables
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sorting">
+   Sorting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#here-is-an-exmaple-of-sorting-by-keys">
+     Here is an exmaple of sorting
+     <strong>
+      By keys
+     </strong>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#here-is-an-exmaple-of-sorting-by-values">
+     Here is an exmaple of sorting
+     <strong>
+      By values
+     </strong>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-and-advanced-syntax-making-a-new-sorted-dictionary-using-a-normal-for-loop-and-using-a-dictionary-comprehension">
+   Bonus and advanced syntax…making a new sorted dictionary using a normal
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   loop and using a
+   <strong>
+    dictionary comprehension
+   </strong>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-new-dictionary-that-contains-sorted-items-of-the-old-dictionary-using-a-for-loop">
+     Make a new dictionary that contains sorted items of the old dictionary using a for loop…
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-new-dictionary-that-contains-sorted-items-of-the-old-dictionary-using-a-dictionary-comprehension-this-is-a-compact-way-of-achieving-the-same-thing-that-the-standard-for-loop-did-above">
+     Make a new dictionary that contains sorted items of the old dictionary using a dictionary comprehension. This is a compact way of achieving the same thing that the standard
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loop did above…
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="p04-dictionaries">
+<h1>P04: Dictionaries<a class="headerlink" href="#p04-dictionaries" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><strong>Concepts</strong>: ordered vs not</p></li>
+<li><p><strong>Initializing and indexing</strong></p></li>
+<li><p><strong>Python dict</strong>: dict, .update(), del</p></li>
+</ul>
+<div class="section" id="dictionaries">
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>Dictionaries are <em>unordered</em>, <em>mutable</em>, <em>collections</em>, of <em>key</em>-<em>value</em> pairs.  They are a mapping from <em>distinct</em> keys, onto values.</p>
+<p>In Python dictionaries are like lists in that they:</p>
+<ul class="simple">
+<li><p>are <em>mutable</em> (so you can change them),</p></li>
+<li><p>are <em>collections</em> of other objects (so you can iterate over them, get their <code class="docutils literal notranslate"><span class="pre">len()</span></code>, check membership with <code class="docutils literal notranslate"><span class="pre">in</span></code>).</p></li>
+<li><p>you can get items with square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> (but not with integer index)</p></li>
+</ul>
+<p>However, they are unlike lists in that:</p>
+<ul class="simple">
+<li><p>they are <em>unordered</em> so they cannot be indexed with integers or sliced.</p></li>
+<li><p>the are <em>mappings</em> between <em>distinct</em> keys and values.</p></li>
+</ul>
+<p>Dictionaries are created with <code class="docutils literal notranslate"><span class="pre">dict()</span></code>, or with <code class="docutils literal notranslate"><span class="pre">{key:value}</span></code> notation or by just initializing an empty dictionary with <code class="docutils literal notranslate"><span class="pre">{}</span></code></p>
+<div class="section" id="init-using-dict">
+<h3>Init using <code class="docutils literal notranslate"><span class="pre">dict()</span></code><a class="headerlink" href="#init-using-dict" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">courses</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span> 
+<span class="n">courses</span><span class="p">[</span><span class="s1">&#39;CSS2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Data/Model Python&#39;</span>
+<span class="n">courses</span><span class="p">[</span><span class="s1">&#39;CSS1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Intro Python&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="two-alternate-ways-to-achieve-the-same-thing-as-above">
+<h3>Two alternate ways to achieve the same thing as above<a class="headerlink" href="#two-alternate-ways-to-achieve-the-same-thing-as-above" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Init with <code class="docutils literal notranslate"><span class="pre">{}</span></code> and then fill like we did above</p></li>
+<li><p>Init with <code class="docutils literal notranslate"><span class="pre">{key:value}</span></code> pairs</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init with {} and then fill (just like we did above)</span>
+<span class="n">courses</span> <span class="o">=</span> <span class="p">{}</span> 
+<span class="n">courses</span><span class="p">[</span><span class="s1">&#39;CSS2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Data/Model Python&#39;</span>
+<span class="n">courses</span><span class="p">[</span><span class="s1">&#39;CSS1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Intro Python&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># directly assign key:value pairs upon creation</span>
+<span class="n">courses</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;CSS2&#39;</span><span class="p">:</span> <span class="s1">&#39;Data/Model Python&#39;</span><span class="p">,</span> <span class="s1">&#39;CSS1&#39;</span><span class="p">:</span> <span class="s1">&#39;Intro Python&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dictionary-elements-can-be-accessed-via-their-keys">
+<h3>Dictionary elements can be accessed via their keys.<a class="headerlink" href="#dictionary-elements-can-be-accessed-via-their-keys" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="p">[</span><span class="s1">&#39;CSS1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intro Python
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="items-can-be-added-to-dictionaries-by-assigning-to-new-keys">
+<h3>Items can be added to dictionaries by assigning to new keys,<a class="headerlink" href="#items-can-be-added-to-dictionaries-by-assigning-to-new-keys" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">courses</span><span class="p">[</span><span class="s1">&#39;ABB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Is this a course?&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;, &#39;ABB&#39;: &#39;Is this a course?&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dictionaries-can-be-updated-with-update-which-will-add-new-keys-and-update-the-values-of-existing-keys">
+<h3>Dictionaries can be updated with <code class="docutils literal notranslate"><span class="pre">.update()</span></code>, which will add new keys, and update the values of existing keys.<a class="headerlink" href="#dictionaries-can-be-updated-with-update-which-will-add-new-keys-and-update-the-values-of-existing-keys" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_courses</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ABB&#39;</span><span class="p">:</span> <span class="s1">&#39;this is not a course&#39;</span><span class="p">,</span> <span class="s1">&#39;CSS100&#39;</span><span class="p">:</span><span class="s1">&#39;Analytic Programming&#39;</span><span class="p">}</span>
+<span class="n">courses</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_courses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;, &#39;ABB&#39;: &#39;this is not a course&#39;, &#39;CSS100&#39;: &#39;Analytic Programming&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="elements-of-dictionaries-can-be-deleted-with-the-del-keyword">
+<h3>Elements of dictionaries can be deleted with the <code class="docutils literal notranslate"><span class="pre">del</span></code> keyword:<a class="headerlink" href="#elements-of-dictionaries-can-be-deleted-with-the-del-keyword" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">courses</span><span class="p">[</span><span class="s1">&#39;ABB&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;, &#39;CSS100&#39;: &#39;Analytic Programming&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can check if a key exists in a dictionary with <code class="docutils literal notranslate"><span class="pre">in</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CSS1&#39;</span> <span class="ow">in</span> <span class="n">courses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ABB&#39;</span> <span class="ow">in</span> <span class="n">courses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+False
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="keys-values-items">
+<h2>Keys, Values, Items<a class="headerlink" href="#keys-values-items" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="you-can-get-or-iterate-over-just-the-keys-with-keys">
+<h3>You can get (or iterate over) just the keys with <code class="docutils literal notranslate"><span class="pre">.keys()</span></code>.<a class="headerlink" href="#you-can-get-or-iterate-over-just-the-keys-with-keys" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">courses</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;CSS2&#39;, &#39;CSS1&#39;, &#39;CSS100&#39;])
+CSS2
+CSS1
+CSS100
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="you-can-get-just-the-values-with-values">
+<h3>You can get just the values with <code class="docutils literal notranslate"><span class="pre">.values()</span></code>.<a class="headerlink" href="#you-can-get-just-the-values-with-values" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">courses</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_values([&#39;Data/Model Python&#39;, &#39;Intro Python&#39;, &#39;Analytic Programming&#39;])
+Data/Model Python
+Intro Python
+Analytic Programming
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="you-can-get-key-value-pairs-as-tuples-with-items">
+<h3>You can get key-value pairs (as tuples) with <code class="docutils literal notranslate"><span class="pre">.items()</span></code>.<a class="headerlink" href="#you-can-get-key-value-pairs-as-tuples-with-items" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_items([(&#39;CSS2&#39;, &#39;Data/Model Python&#39;), (&#39;CSS1&#39;, &#39;Intro Python&#39;), (&#39;CSS100&#39;, &#39;Analytic Programming&#39;)])
+(&#39;CSS2&#39;, &#39;Data/Model Python&#39;)
+(&#39;CSS1&#39;, &#39;Intro Python&#39;)
+(&#39;CSS100&#39;, &#39;Analytic Programming&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="it-is-often-useful-to-do-assignment-unpacking-or-to-unpack-the-key-value-tuple-into-two-variables">
+<h3>It is often useful to do <strong>assignment unpacking</strong>, or to unpack the (key,value) tuple into two variables<a class="headerlink" href="#it-is-often-useful-to-do-assignment-unpacking-or-to-unpack-the-key-value-tuple-into-two-variables" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>This is super handy because then you have access to both the key and the value inside of the for loop</p></li>
+<li><p>By convention use the variables <code class="docutils literal notranslate"><span class="pre">k</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code> to improve readability, but remember that you can use any variable name you want…</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Course number </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> is titled </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Course number CSS2 is titled Data/Model Python
+Course number CSS1 is titled Intro Python
+Course number CSS100 is titled Analytic Programming
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sorting">
+<h2>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
+<p>As you saw above, the order of key-value pairs in a dictionary is determined by when they were added.  Often we want to sort the contents either by the keys, or by the values.</p>
+<ul class="simple">
+<li><p>To get a sorted dictionary, we will end up making a new dictionary by inserting key-value pairs in a sorted order.</p></li>
+</ul>
+<div class="section" id="here-is-an-exmaple-of-sorting-by-keys">
+<h3>Here is an exmaple of sorting <strong>By keys</strong><a class="headerlink" href="#here-is-an-exmaple-of-sorting-by-keys" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_courses</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="n">sorted_courses</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">courses</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">courses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sorted_courses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;, &#39;CSS100&#39;: &#39;Analytic Programming&#39;}
+{&#39;CSS1&#39;: &#39;Intro Python&#39;, &#39;CSS100&#39;: &#39;Analytic Programming&#39;, &#39;CSS2&#39;: &#39;Data/Model Python&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="here-is-an-exmaple-of-sorting-by-values">
+<h3>Here is an exmaple of sorting <strong>By values</strong><a class="headerlink" href="#here-is-an-exmaple-of-sorting-by-values" title="Permalink to this headline">¶</a></h3>
+<p>Sorting by values is a bit tricky – we can sort the values, but we have no reliable way to figure out which keys were associated with the sorted values.  Consequently, we have to sort the key-value items.  But doing so requires that we can tell the <code class="docutils literal notranslate"><span class="pre">sorted</span></code> function to use the second element of the pair to sort.  This is all doable, but involves a lot of extra coding…</p>
+<p>Instead, we will use the <code class="docutils literal notranslate"><span class="pre">itemgetter</span></code> function from the <code class="docutils literal notranslate"><span class="pre">operator</span></code> library</p>
+<ul class="simple">
+<li><p>The default is for <code class="docutils literal notranslate"><span class="pre">sorted</span></code> to sort by keys…<code class="docutils literal notranslate"><span class="pre">itemgetter</span></code> will allow you to sort by values</p></li>
+<li><p>Note that in a given <code class="docutils literal notranslate"><span class="pre">{key:value}</span></code> pair that the key is in the 0th index and the value is in the 1nth index…just noting that for now, but you’ll see why this is important when we use <code class="docutils literal notranslate"><span class="pre">itemgetter</span></code></p></li>
+<li><p>And one side-note that this is the first time that we’ve covered importing extra functionality from a library.</p></li>
+<li><p>You will use this more and more often as there are many libraries that expand the core functionality of python (e.g., NumPy, Pandas, Matplotlib, etc).</p></li>
+<li><p>We will cover those in the coming weeks, and will also cover more about how to do imports.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this imports the itemgetter function</span>
+<span class="c1"># remember that once you import something</span>
+<span class="c1"># it is available to all other code cells</span>
+<span class="c1"># in the notebook...so run this cell first</span>
+<span class="c1"># and then you&#39;ll have access to `itemgetter` </span>
+<span class="c1"># in all the other cells...</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;before sorting, items in order of insertion:  &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;default sorting sorts by first element of pair (key):  &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># we&#39;re sorting by the 1nth index in the {key:value} pairs, which is the value..</span>
+<span class="c1"># see what happens if you use itemgetter(0)- then it will sort by the keys!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sorting by the second element (index=1) of the pair with key=itemgetter(1):  &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>before sorting, items in order of insertion:  
+(&#39;CSS2&#39;, &#39;Data/Model Python&#39;)
+(&#39;CSS1&#39;, &#39;Intro Python&#39;)
+(&#39;CSS100&#39;, &#39;Analytic Programming&#39;)
+default sorting sorts by first element of pair (key):  
+(&#39;CSS1&#39;, &#39;Intro Python&#39;)
+(&#39;CSS100&#39;, &#39;Analytic Programming&#39;)
+(&#39;CSS2&#39;, &#39;Data/Model Python&#39;)
+sorting by the second element (index=1) of the pair with key=itemgetter(1):  
+(&#39;CSS100&#39;, &#39;Analytic Programming&#39;)
+(&#39;CSS2&#39;, &#39;Data/Model Python&#39;)
+(&#39;CSS1&#39;, &#39;Intro Python&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="bonus-and-advanced-syntax-making-a-new-sorted-dictionary-using-a-normal-for-loop-and-using-a-dictionary-comprehension">
+<h2>Bonus and advanced syntax…making a new sorted dictionary using a normal <code class="docutils literal notranslate"><span class="pre">for</span></code> loop and using a <strong>dictionary comprehension</strong><a class="headerlink" href="#bonus-and-advanced-syntax-making-a-new-sorted-dictionary-using-a-normal-for-loop-and-using-a-dictionary-comprehension" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="make-a-new-dictionary-that-contains-sorted-items-of-the-old-dictionary-using-a-for-loop">
+<h3>Make a new dictionary that contains sorted items of the old dictionary using a for loop…<a class="headerlink" href="#make-a-new-dictionary-that-contains-sorted-items-of-the-old-dictionary-using-a-for-loop" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">courses_by_title</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">number</span><span class="p">,</span><span class="n">title</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)):</span>
+    <span class="n">courses_by_title</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">courses_by_title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS100&#39;: &#39;Analytic Programming&#39;, &#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="make-a-new-dictionary-that-contains-sorted-items-of-the-old-dictionary-using-a-dictionary-comprehension-this-is-a-compact-way-of-achieving-the-same-thing-that-the-standard-for-loop-did-above">
+<h3>Make a new dictionary that contains sorted items of the old dictionary using a dictionary comprehension. This is a compact way of achieving the same thing that the standard <code class="docutils literal notranslate"><span class="pre">for</span></code> loop did above…<a class="headerlink" href="#make-a-new-dictionary-that-contains-sorted-items-of-the-old-dictionary-using-a-dictionary-comprehension-this-is-a-compact-way-of-achieving-the-same-thing-that-the-standard-for-loop-did-above" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">courses_by_title</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">courses_by_title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;CSS100&#39;: &#39;Analytic Programming&#39;, &#39;CSS2&#39;: &#39;Data/Model Python&#39;, &#39;CSS1&#39;: &#39;Intro Python&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="P04.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">P04: Dictionaries, Sets, and File reading and writing (File I/O)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="P04-sets.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">P04: Sets</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By John Serences for Winter 2022 (based on initial design by Ed Vul for SS2, 2021)<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

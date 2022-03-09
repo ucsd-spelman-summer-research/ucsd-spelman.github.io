@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P04: Reading and writing files &#8212; UCSD CSS 1</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Working with files once they have been read in…" href="P04-WorkingWithTextFiles.html" />
+    <link rel="prev" title="P04: Sets" href="P04-sets.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">UCSD CSS 1</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome to CSS 1
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Course (CSS 1 Winter 2022)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/expectations.html">
+   Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/datahub.html">
+   Datahub assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/debugging.html">
+   Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course/resources.html">
+   Extracurricular Resources
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Content
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P01.html">
+   P01: Getting oriented
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-css.html">
+     P01: Computational Social Science
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-programming.html">
+     P01: programming concepts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-jupyter.html">
+     P01: Our environment
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P01-python.html">
+     P01:  Python syntax, variables, types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P02.html">
+   P02: Control flow and logic
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-conditionals.html">
+     P02: Branching via conditional statement: if..elif..else..
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-loops.html">
+     P02: Loops!
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P02-while.html">
+     P02: While loops
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="P03.html">
+   P03: Sequence types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P03-sequence.html">
+     P03: Sequence types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="P04.html">
+   P04: Dictionaries, Sets, and File reading and writing (File I/O)
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-dictionaries.html">
+     P04: Dictionaries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-sets.html">
+     P04: Sets
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     P04: Reading and writing files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="P04-WorkingWithTextFiles.html">
+     Working with files once they have been read in…
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/lectures/P04-files.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/UCSD-CSS-001/ucsd-css-001.github.io"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/UCSD-CSS-001/ucsd-css-001.github.io/issues/new?title=Issue%20on%20page%20%2Flectures/P04-files.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/UCSD-CSS-001/ucsd-css-001.github.io/master?urlpath=tree/lectures/P04-files.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-files">
+   Reading files
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-a-file">
+     Finding a file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#opening-a-file">
+     Opening a file
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#file-paths">
+   File Paths
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#absolute-vs-relative-paths">
+     Absolute vs. Relative Paths
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#absolute-paths">
+       Absolute Paths
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#relative-paths">
+       Relative Paths
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opening-and-interacting-with-files">
+   Opening and interacting with files!
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#open-a-file-for-writing-and-just-write-some-text-to-it-using-the-f-string-method-we-learned-last-time">
+     Open a file for writing, and just write some text to it using the f-string method we learned last time…
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#you-can-use-the-built-in-magic-pycat-to-view-the-contents-of-the-file">
+     You can use the built in magic
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       %pycat
+      </span>
+     </code>
+     to view the contents of the file.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#open-a-file-for-reading">
+     Open a file for reading…
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#f-read">
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         f.read()
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#this-time-use-f-read-but-specify-a-fixed-number-of-elements-to-read-instead-of-the-entire-file">
+       This time use `f.read() but specify a fixed number of elements to read (instead of the entire file).
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-readline-read-one-line">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       f.readline
+      </span>
+     </code>
+     - read one line
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#side-note-but-sorta-related-to-f-readline-if-you-want-to-loop-over-lines-one-at-a-time-use-a-for-loop-like-this">
+       Side note, but sorta related to
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         f.readline()
+        </span>
+       </code>
+       …if you want to loop over lines, one at a time, use a for loop like this:
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-readlines-read-entire-file-into-a-list-of-strings-where-each-string-is-a-line-from-the-file">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       f.readlines()
+      </span>
+     </code>
+     - read entire file into a list of strings, where each string is a line from the file.
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="p04-reading-and-writing-files">
+<h1>P04: Reading and writing files<a class="headerlink" href="#p04-reading-and-writing-files" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><strong>Python files</strong>: open, close, with open as fp</p></li>
+</ul>
+<div class="section" id="reading-files">
+<h2>Reading files<a class="headerlink" href="#reading-files" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="finding-a-file">
+<h3>Finding a file<a class="headerlink" href="#finding-a-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Files are stored somewhere in your computer systems hard drive or storage area.</p></li>
+<li><p>That location is specified via a file <strong>path</strong>.</p></li>
+<li><p>A file path encodes the location of the file within the directory structure on the computer.</p></li>
+<li><p><em>Absolute</em> file paths encode the location of the file relative to the root, or base directory of the file system.  So let’s say we have a file named <code class="docutils literal notranslate"><span class="pre">filename.ext</span></code> located in <code class="docutils literal notranslate"><span class="pre">folder2</span></code>, which is located inside <code class="docutils literal notranslate"><span class="pre">jserences</span></code>, which is inside <code class="docutils literal notranslate"><span class="pre">Users</span></code>, which is in the base (root) directory of the file system.  On a unix machine (such as Mac OS, Linux, etc.) this location is encoded as follows <code class="docutils literal notranslate"><span class="pre">/Users/jserences/folder2/filename.ext</span></code> where the slashes (<code class="docutils literal notranslate"><span class="pre">/</span></code>) indicates directories or folders. Windows machines use the forward slash <code class="docutils literal notranslate"><span class="pre">\</span></code>, so that path would look something like <code class="docutils literal notranslate"><span class="pre">C:\Users\jserences\folder2\filename.ext</span></code>.</p></li>
+<li><p><em>Relative</em> file paths encode the location of the file relative to the current location or path, where the program is running. So if a program has been launched in the folder <code class="docutils literal notranslate"><span class="pre">/Users/jserences/programs/</span></code>, then the relative path to <code class="docutils literal notranslate"><span class="pre">/Users/jserences/folder2/filename.ext</span></code> would involve going up one directory in the file tree using the <code class="docutils literal notranslate"><span class="pre">..</span></code> syntax, then down into <code class="docutils literal notranslate"><span class="pre">folder2</span></code> and getting <code class="docutils literal notranslate"><span class="pre">filename.ext</span></code>.  The full relative path would be <code class="docutils literal notranslate"><span class="pre">../folder2/filename.ext</span></code>.  The key part here is that <code class="docutils literal notranslate"><span class="pre">..</span></code> move you up one level in the directory tree <strong>relative</strong> to the the current working directory. Basically <code class="docutils literal notranslate"><span class="pre">..</span></code> is like pressing the <code class="docutils literal notranslate"><span class="pre">back</span></code> arrow on a ‘Finder’ window when you’re moving around using the mouse and the windows provided by your operating system.</p></li>
+</ul>
+</div>
+<div class="section" id="opening-a-file">
+<h3>Opening a file<a class="headerlink" href="#opening-a-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Files are accessed via the <code class="docutils literal notranslate"><span class="pre">open(file,</span> <span class="pre">mode)</span></code> command, specifying the (relative or absolute) path to the  file, and the mode with which you want to open it (‘r’ for read, ‘w’ for write, ‘a’ for append, there are <a class="reference external" href="https://docs.python.org/3/library/functions.html#open">more</a>).</p></li>
+<li><p>Opening a file creates a file object which can be read from (or written to, or appended to, depending on what mode you used to open it).</p>
+<ul>
+<li><p>Assuming we are dealing with text files, <code class="docutils literal notranslate"><span class="pre">file.read()</span></code> reads the entire content of the file as one string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.readlines()</span></code> reads the entire content of the file as a list of strings, with each element corresponding to one line in the text file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.readline()</span></code> reads one line at a time, and is helpful if your file is large, and you do not want to load its entirety into memory.</p></li>
+</ul>
+</li>
+<li><p>When you open a file, your operating system is notified that some program is doing something to that file, and it will prevent other changes from being made to that file. Consequently, it is important that you <em>close</em> the file after opening it.  In Python, the easiest way to make this that this is done without errors is via the <code class="docutils literal notranslate"><span class="pre">with</span></code> keyword, that creates a temporary context in which the file is open, and then closes the file as soon as all the operations that need to be carried out on the file are completed. Bad things can happen if you do not close the file, so make sure you’re careful with this (the file might get corrupted, you might find that nothing was written to the file, etc).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="file-paths">
+<h2>File Paths<a class="headerlink" href="#file-paths" title="Permalink to this headline">¶</a></h2>
+<p>The specific location of a file or folder on your computer.</p>
+<p>When using a Graphical User Interface (GUI), you click on directories to access subdirectories and finally find the file you’re interested in.</p>
+<p>When using the command line, you specify a file’s path explicitly with text.</p>
+<div class="section" id="absolute-vs-relative-paths">
+<h3>Absolute vs. Relative Paths<a class="headerlink" href="#absolute-vs-relative-paths" title="Permalink to this headline">¶</a></h3>
+<p>The two ways to specify the path to your file of interest allow for flexibility in programming.</p>
+<div class="section" id="absolute-paths">
+<h4>Absolute Paths<a class="headerlink" href="#absolute-paths" title="Permalink to this headline">¶</a></h4>
+<p>Absolute paths specify the full path for a given file system (starting from the root directory).</p>
+<p><strong>root</strong> specifies the ‘highest’ directory in the file structure (the start).</p>
+<p>An absolute file path starts with a slash <code class="docutils literal notranslate"><span class="pre">/</span></code> specifying the root directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## absolute path</span>
+<span class="c1">## this is specific to my computer</span>
+<span class="c1">## look at the path output above for you computer</span>
+<span class="o">%</span><span class="k">ls</span> &#39;/Users/johnserences/Dropbox/My Papers/Editorial/&#39;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Blue">eLife</span>/
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="relative-paths">
+<h4>Relative Paths<a class="headerlink" href="#relative-paths" title="Permalink to this headline">¶</a></h4>
+<p><strong>Relative paths</strong> specify the path to a file from your <strong>current working directory</strong> (where your computer is working right now).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># remind us of our current working directory</span>
+<span class="o">%</span><span class="k">pwd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/Users/johnserences/Documents/GitHub/ucsd-css-001.github.io/lectures&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># relative path</span>
+<span class="c1"># this is specific to my computer</span>
+<span class="o">%</span><span class="k">ls</span> ../../Lectures
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ls: ../../Lectures: No such file or directory
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span></code> specify you want to move one directory up in your hierarchy - here I am moving up two levels with the <code class="docutils literal notranslate"><span class="pre">../../</span></code> syntax</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lectures</span></code> specifies the path to the directory I want to list files in</p></li>
+<li><p>each directory is separated with a slash (<code class="docutils literal notranslate"><span class="pre">/</span></code>)</p></li>
+</ul>
+<p>This <strong>relative</strong> path does <em>not</em> start with a leading slash (b/c it’s not an absolute path).</p>
+</div>
+</div>
+</div>
+<div class="section" id="opening-and-interacting-with-files">
+<h2>Opening and interacting with files!<a class="headerlink" href="#opening-and-interacting-with-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">with</span></code> method of opening files will ensure that they are closed properly when you are done with them…</p></li>
+<li><p>This will create a file object <code class="docutils literal notranslate"><span class="pre">f</span></code> (although you can name it whatever you’d like)</p></li>
+<li><p>You can then use the file object <code class="docutils literal notranslate"><span class="pre">f</span></code> to write stuff to the file using <code class="docutils literal notranslate"><span class="pre">f.write()</span></code></p></li>
+</ul>
+<div class="section" id="open-a-file-for-writing-and-just-write-some-text-to-it-using-the-f-string-method-we-learned-last-time">
+<h3>Open a file for writing, and just write some text to it using the f-string method we learned last time…<a class="headerlink" href="#open-a-file-for-writing-and-just-write-some-text-to-it-using-the-f-string-method-we-learned-last-time" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+        <span class="c1"># include the \n newline character.</span>
+        <span class="c1"># its like pressing the `enter` key at the end of each line</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;This is the </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">th line of the file</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the escape sequence <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> in the strings – these are the <em>newline</em> escape character, and is how we encode line breaks inside strings.</p>
+</div>
+<div class="section" id="you-can-use-the-built-in-magic-pycat-to-view-the-contents-of-the-file">
+<h3>You can use the built in magic <code class="docutils literal notranslate"><span class="pre">%pycat</span></code> to view the contents of the file.<a class="headerlink" href="#you-can-use-the-built-in-magic-pycat-to-view-the-contents-of-the-file" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pycat</span> test.txt
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="open-a-file-for-reading">
+<h3>Open a file for reading…<a class="headerlink" href="#open-a-file-for-reading" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f.read()</span></code> will read in a fixed number of elements…where <code class="docutils literal notranslate"><span class="pre">f.read(x)</span></code> will read in <code class="docutils literal notranslate"><span class="pre">x</span></code> elements</p></li>
+<li><p>if not parameters are passed to <code class="docutils literal notranslate"><span class="pre">f.read()</span></code> then it will read the entire file! be careful with this if you’re dealing with super big files!</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f.readline()</span></code> will read in one line at a time (and it knows how to find the end of each line because its looking for the the <code class="docutils literal notranslate"><span class="pre">\n</span></code> newline escape character…that’s why it is so important to include the <code class="docutils literal notranslate"><span class="pre">\n</span></code> in your files when you write them…makes it way easier to deal with when reading the data back in.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f.readlines()</span></code> will read in the entire file and will store each line as a string that is an entry in a list…</p></li>
+</ul>
+<div class="section" id="f-read">
+<h4><code class="docutils literal notranslate"><span class="pre">f.read()</span></code><a class="headerlink" href="#f-read" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open our file for reading...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># read the entire file...</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    
+<span class="c1"># print it out</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the 0th line of the file
+This is the 1th line of the file
+This is the 2th line of the file
+This is the 3th line of the file
+This is the 4th line of the file
+This is the 5th line of the file
+This is the 6th line of the file
+This is the 7th line of the file
+This is the 8th line of the file
+This is the 9th line of the file
+This is the 10th line of the file
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="this-time-use-f-read-but-specify-a-fixed-number-of-elements-to-read-instead-of-the-entire-file">
+<h4>This time use `f.read() but specify a fixed number of elements to read (instead of the entire file).<a class="headerlink" href="#this-time-use-f-read-but-specify-a-fixed-number-of-elements-to-read-instead-of-the-entire-file" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a variable to determine how many elements to read.</span>
+<span class="n">num_elements_to_read</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># open our file for reading...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># This time just read in a set number of elements</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">num_elements_to_read</span><span class="p">)</span>
+    
+<span class="c1"># print it out - note that there are </span>
+<span class="c1"># num_elements_to_read characters (including spaces)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is th
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="f-readline-read-one-line">
+<h3><code class="docutils literal notranslate"><span class="pre">f.readline</span></code> - read one line<a class="headerlink" href="#f-readline-read-one-line" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open our file for reading...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># read a line from the file</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    
+<span class="c1"># print it out</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the 0th line of the file
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="side-note-but-sorta-related-to-f-readline-if-you-want-to-loop-over-lines-one-at-a-time-use-a-for-loop-like-this">
+<h4>Side note, but sorta related to <code class="docutils literal notranslate"><span class="pre">f.readline()</span></code>…if you want to loop over lines, one at a time, use a for loop like this:<a class="headerlink" href="#side-note-but-sorta-related-to-f-readline-if-you-want-to-loop-over-lines-one-at-a-time-use-a-for-loop-like-this" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open our file for reading...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># read in line by line...</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># end = &quot;&quot; tells the `print` statement not to end each </span>
+        <span class="c1"># line with a &#39;\n&#39; because there is already a &#39;\n&#39; character</span>
+        <span class="c1"># at the end of each line because that is how we wrote it out...</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the 0th line of the file
+This is the 1th line of the file
+This is the 2th line of the file
+This is the 3th line of the file
+This is the 4th line of the file
+This is the 5th line of the file
+This is the 6th line of the file
+This is the 7th line of the file
+This is the 8th line of the file
+This is the 9th line of the file
+This is the 10th line of the file
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="f-readlines-read-entire-file-into-a-list-of-strings-where-each-string-is-a-line-from-the-file">
+<h3><code class="docutils literal notranslate"><span class="pre">f.readlines()</span></code> - read entire file into a list of strings, where each string is a line from the file.<a class="headerlink" href="#f-readlines-read-entire-file-into-a-list-of-strings-where-each-string-is-a-line-from-the-file" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open our file for reading...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># read the entire file...with each line </span>
+    <span class="c1"># returned as a string in a list</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    
+<span class="c1"># print the list of strings</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+<span class="c1"># because `out` is now a list, </span>
+<span class="c1"># you can index/slice to find specific </span>
+<span class="c1"># elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Slicing the list to grab a subset of the strings...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;This is the 0th line of the file\n&#39;, &#39;This is the 1th line of the file\n&#39;, &#39;This is the 2th line of the file\n&#39;, &#39;This is the 3th line of the file\n&#39;, &#39;This is the 4th line of the file\n&#39;, &#39;This is the 5th line of the file\n&#39;, &#39;This is the 6th line of the file\n&#39;, &#39;This is the 7th line of the file\n&#39;, &#39;This is the 8th line of the file\n&#39;, &#39;This is the 9th line of the file\n&#39;, &#39;This is the 10th line of the file\n&#39;]
+
+Slicing the list to grab a subset of the strings...
+
+[&#39;This is the 2th line of the file\n&#39;, &#39;This is the 3th line of the file\n&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="P04-sets.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">P04: Sets</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="P04-WorkingWithTextFiles.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Working with files once they have been read in…</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By John Serences for Winter 2022 (based on initial design by Ed Vul for SS2, 2021)<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
