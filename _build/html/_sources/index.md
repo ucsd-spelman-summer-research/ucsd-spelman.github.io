@@ -1,4 +1,4 @@
-# Spelman College + UCSD Summer Research Program
+# Welcome!
 
 The UC San Diego Department of Psychology and the UCSD STARS program have formed a partnership with the Spelman College Psychology and Neuroscience program. 
 

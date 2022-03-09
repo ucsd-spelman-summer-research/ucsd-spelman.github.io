@@ -4,7 +4,7 @@
 format: jb-book
 root: index
 parts:
-  - caption: Spelman/UCSD Summer Research Program
+  - caption: Contents
     chapters:
       - file: program/overview
       - file: program/expectations
