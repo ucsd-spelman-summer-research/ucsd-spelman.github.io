@@ -4,7 +4,7 @@ The UC San Diego Department of Psychology and the UCSD STARS program have formed
 
 The research program will run from June 19th, 2022 until August 12th, 2022 and students will participate in mentored research and other training opportunities.
 
-**Students will**
+## Students will
 
 * Gain research experience with a UC San Diego faculty member
 * Attend a GRE preparation course
@@ -13,7 +13,7 @@ The research program will run from June 19th, 2022 until August 12th, 2022 and s
 * Receive a stipend for living expenses in San Diego
 * Attend coding workshops and special seminar series run by UCSD faculty 
 
-**Applicants must**
+## Applicants must
 
 * Be 18 years of age
 * Be U.S. Citizens or Permanent Residents. 
@@ -21,7 +21,11 @@ The research program will run from June 19th, 2022 until August 12th, 2022 and s
 * Be interested in conducting full-time research in the summer for eight weeks with no commitments such as summer school or a full/part-time job
 * Demonstrate academic aptitude and achievement
 
-**Application Deadline**
+## FAQs
+
+Frequently asked questions about the application process can be found [here](https://grad.ucsd.edu/diversity/programs/stars/faq.html).
+
+## Application Deadline
 
 February 9th, 2022, [Application link](https://grad.ucsd.edu/diversity/programs/stars/index.html)
 
