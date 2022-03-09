@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Spelman/UCSD Psychology and Neuroscience Summer Research Program
-author: John Serences, Spring 2022
+author: John Serences
 logo: logo.svg
 
 # Force re-execution of notebooks on each build.
