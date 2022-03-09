@@ -10,7 +10,7 @@ The research program will run from June 19th, 2022 until August 12th, 2022 and s
 * Attend a GRE preparation course
 * Attend graduate school preparation work-shops
 * Present at the annual UC San Diego Summer Research Conference
-* Receive a stipend for living expenses in San Diego
+* Be paid a stipend, and all travel expenses and lodging are fully covered
 * Attend coding workshops and special seminar series run by UCSD faculty 
 
 ## Applicants must

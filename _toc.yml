@@ -9,5 +9,5 @@ parts:
       - file: program/requirements
       - file: program/faculty
       - file: program/expectations
-      - file: program/principles
+      - file: program/principles_resources
 
