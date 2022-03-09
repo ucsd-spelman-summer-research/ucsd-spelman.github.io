@@ -1,26 +1,11 @@
-# Welcome!
+# Welcome to the Spelman/UCSD Summer Research Program  
 
-The UC San Diego Department of Psychology and the UCSD STARS program have formed a partnership with the Spelman College Psychology and Neuroscience program. 
+## Goals
 
-The research program will run from June 19th, 2022 until August 12th, 2022 and students will participate in mentored research and other training opportunities.
+This program is designed to provide exposure to lab-based scientific training and introduction to life as a future graduate student researcher. Psychology is one of the largest majors at Spelman, and many students go on to finish Psychology PhDs. Our primary goal is to provide research experience at UCSD and to recruit talented new students to join our graduate program or graduate programs at other UC campuses. 
 
-**Students will**
+Students will live on campus at UCSD for 8 weeks during the summer to participate in the Summer Training Academy for Research in the Sciences (STARS) program and to partner with UCSD faculty and graduate student mentors. The program includes eight weeks of daily lab research, student development workshops, graduate record exam (GRE) training, teambuilding physical exercises, career workshops and social activities. At the end of the program, each student gives a presentation at the UCSD Summer Research Symposium.
 
-* Gain research experience with a UC San Diego faculty member
-* Attend a GRE preparation course
-* Attend graduate school preparation work-shops
-* Present at the annual UC San Diego Summer Research Conference
-* Receive a stipend for living expenses in San Diego
-* Attend coding workshops and special seminar series run by UCSD faculty 
+## Strategy
 
-**Applicants must**
-
-* Be 18 years of age
-* Be U.S. Citizens or Permanent Residents. 
-* AB 540 or DACA students are eligible
-* Be interested in conducting full-time research in the summer for eight weeks with no commitments such as summer school or a full/part-time job
-* Demonstrate academic aptitude and achievement
-
-**Application Deadline**
-
-February 9th, 2022, [Application link](https://grad.ucsd.edu/diversity/programs/stars/index.html)
+Spelman students will be matched with individual UCSD faculty members to perform research projects, by application and acceptance into individual laboratories. Students will meet with their faculty advisor once weekly in a one-on-one meeting, and attend lab meetings roughly once per week. Typically, PhD level graduate students will oversee the student’s day-to-day research activity. UC San Diego faculty within this proposal have extensive experience working with undergraduates in laboratory settings and were chosen for their degree of enthusiasm in promoting diversity in our academic programs.
