@@ -1,4 +1,7 @@
-# Participating Faculty - feel free to get in touch!
+# Participating Faculty
+
+##  Feel free to get in touch!
+
 
 | Name     | Role                | email    | Research Description and Lab Webpage |
 | ----------------: | :---------| -----------| ------------ | 

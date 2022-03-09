@@ -1,4 +1,4 @@
-# Expectations for summer research students
+# Expectations
 
 It is important to us that each undergraduate student conduct meaningful experiments, analyze results carefully, present their findings to the group on a regular basis, and read and discuss papers in the scientific literature. You will work hard in our program but you will also learn a tremendous amount, and be well situated for success in your continued education plans. There is a direct relationship between how much effort you put in, and how much you will achieve. In general, the main criteria for summer research are to conduct good science and be a good team player. Conducting research is a privilege and huge responsibility. Often we are funded through tax payer dollars. The following specific expectations apply:
  
@@ -20,7 +20,7 @@ Complete the required safety training and use safe techniques always. Safety req
 Take your training seriously; any behavior that endangers humans or animals or the laboratory environment will not be taken lightly and may lead to your being asked to leave the lab.
 
 ## General summer schedule
-Activities are listed as facilitated by UC San Diego Psychology (Psych) or the UCSD STARS program (STARS). 
+Activities are listed as facilitated by UC San Diego Psychology (Psych) or the UCSD STARS program (STARS). More specifics about the STARS summer schedule can be found [here](https://grad.ucsd.edu/diversity/programs/stars/schedule1.html).
 
 ### Pre Summer Research
 February-March (Psych): Initial zoom conversations with Matched Faculty and lab will be used to introduce Spelman students.
