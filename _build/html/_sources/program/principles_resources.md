@@ -24,19 +24,19 @@ Below we provide a list of options that may be pursued alone or in any combinati
 * The Department of Psychiatry has developed a webpage with resources and guidance to assist individuals [responding to traumatic events](https://medschool.ucsd.edu/som/psychiatry/Pages/Traumatic-Events.aspx).
 
 * Contact Psychology Staff members:
-	* Student Affairs Manager, Samantha Llanos (858-534-3002, [sgllanos@ucsd.edu](mailto: sgllanos@ucsd.edu))
-	* Graduate Coordinator, Janice Feng (858-534-4416, [jaf004@ucsd.edu](mailto: jaf004@ucsd.edu)) 
-	* Human Resources, Miren Edelstein (858-534-3010, [mhedelst@ucsd.edu](mailto: mhedelst@ucsd.edu)) 
-	* MSO, Peter Hinkley (858-534-2947, [phinkley@ucsd.edu](mailto: phinkley@ucsd.edu))
+	* Student Affairs Manager, Samantha Llanos (858-534-3002, [sgllanos@ucsd.edu](mailto:sgllanos@ucsd.edu))
+	* Graduate Coordinator, Janice Feng (858-534-4416, [jaf004@ucsd.edu](mailto:jaf004@ucsd.edu)) 
+	* Human Resources, Miren Edelstein (858-534-3010, [mhedelst@ucsd.edu](mailto:mhedelst@ucsd.edu)) 
+	* MSO, Peter Hinkley (858-534-2947, [phinkley@ucsd.edu](mailto:phinkley@ucsd.edu))
 
 * Contact Psychology Faculty Chair and members of Climate Committee:
 
-	* Department Chair, Michael Gorman (858-534-6303, [mgorman@ucsd.edu](mailto: mgorman@ucsd.edu))
+	* Department Chair, Michael Gorman (858-534-6303, [mgorman@ucsd.edu](mailto:mgorman@ucsd.edu))
 	* Faculty representatives on the Department’s Climate Committee:
-		* John Serences (858-534-3686, [jserences@ucsd.edu](mailto: jserences@ucsd.edu))
-		* Christina Gremel (858-534-8933, [tgremel@ucsd.edu](mailto: tgremel@ucsd.edu))
-		* Edward Vul (858-534-4401, [evul@ucsd.edu](mailto: evul@ucsd.edu))
-		* Stephan Anagnostaras (858-224-2531, [stephana@ucsd.edu](mailto: stephana@ucsd.edu))
+		* John Serences (858-534-3686, [jserences@ucsd.edu](mailto:jserences@ucsd.edu))
+		* Christina Gremel (858-534-8933, [tgremel@ucsd.edu](mailto:tgremel@ucsd.edu))
+		* Edward Vul (858-534-4401, [evul@ucsd.edu](mailto:evul@ucsd.edu))
+		* Stephan Anagnostaras (858-224-2531, [stephana@ucsd.edu](mailto:stephana@ucsd.edu))
 
 The Department will take all reports seriously and complainants can expect:
 
