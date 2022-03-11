@@ -1,4 +1,4 @@
-# Principles of Community And Resources
+# Principles of Community
 
 The Department of Psychology is committed to supporting an environment where all students, post-doctoral researchers, staff, research scientists and faculty can work together without abusive or demeaning treatment. The Department of Psychology is committed to fostering an environment that:
 
