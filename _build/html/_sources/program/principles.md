@@ -35,7 +35,6 @@ Below we provide a list of options that may be pursued alone or in any combinati
 	* Faculty representatives on the Department’s Climate Committee:
 		* John Serences (858-534-3686, [jserences@ucsd.edu](mailto:jserences@ucsd.edu))
 		* Christina Gremel (858-534-8933, [tgremel@ucsd.edu](mailto:tgremel@ucsd.edu))
-		* Edward Vul (858-534-4401, [evul@ucsd.edu](mailto:evul@ucsd.edu))
 		* Stephan Anagnostaras (858-224-2531, [stephana@ucsd.edu](mailto:stephana@ucsd.edu))
 
 The Department will take all reports seriously and complainants can expect:

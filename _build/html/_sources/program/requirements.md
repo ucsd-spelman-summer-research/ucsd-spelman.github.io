@@ -2,7 +2,7 @@
 
 The UC San Diego Department of Psychology and the UCSD STARS program have formed a partnership with the Spelman College Psychology and Neuroscience program. 
 
-The research program will run from June 19th, 2022 until August 12th, 2022 and students will participate in mentored research and other training opportunities.
+The research program will run from June 25th, 2023 until August 18th, 2023 and students will participate in mentored research and other training opportunities.
 
 ## Students will
 
@@ -27,8 +27,7 @@ Frequently asked questions about the application process can be found [here](htt
 
 ## Application Deadline
 
-February 9th, 2022, [Application link](https://grad.ucsd.edu/diversity/programs/stars/index.html)
-
+March 10, 2023
 
 
   
